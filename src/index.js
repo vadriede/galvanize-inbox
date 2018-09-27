@@ -6,6 +6,8 @@ import 'font-awesome/css/font-awesome.css';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import Adapter from 'enzyme-adapter-react-16';
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

@@ -1,9 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import App from './App';
+import Toolbar from './components/Toolbar'
+import MessageList from './components/MessageList'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+
+it('renders with all required elements', () => {
+  const app = shallow(<App />)
+
+  expect(app.find(Toolbar)).toHaveLength(1);
+  expect(app.find(MessageList)).toHaveLength(1);
 });
