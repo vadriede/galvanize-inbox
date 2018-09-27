@@ -6,8 +6,16 @@ import 'font-awesome/css/font-awesome.css';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import Adapter from 'enzyme-adapter-react-16';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './reducers/index';
 
-
-ReactDOM.render(<App />, document.getElementById('root'));
+const middleware = applyMiddleware(thunk);
+const store = createStore(reducer, middleware)
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , document.getElementById('root'));
 registerServiceWorker();
