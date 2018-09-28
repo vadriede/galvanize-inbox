@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Message from './Message';
+
 
 const MessageList = ({ messages }) => {
     return (
@@ -9,4 +11,10 @@ const MessageList = ({ messages }) => {
     )
 }
 
-export default MessageList
+const mapStateToProps = (state) => {
+    return {
+        messages: state.messages,
+    }
+}
+
+export default connect(mapStateToProps)(MessageList)

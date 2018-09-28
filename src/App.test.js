@@ -4,10 +4,15 @@ import App from './App';
 import Toolbar from './components/Toolbar'
 import MessageList from './components/MessageList'
 
+describe('App', () => {
+  it('renders with all required elements', () => {
+    const app = shallow(<App />)
 
-it('renders with all required elements', () => {
-  const app = shallow(<App />)
+    expect(app.find(Toolbar)).toHaveLength(1);
+    expect(app.find(MessageList)).toHaveLength(1);
+  });
 
-  expect(app.find(Toolbar)).toHaveLength(1);
-  expect(app.find(MessageList)).toHaveLength(1);
+
 });
+
+
