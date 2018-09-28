@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducers/index';
+import { reducer } from './reducers/reducers';
 
 const middleware = applyMiddleware(thunk);
 const store = createStore(reducer, middleware)

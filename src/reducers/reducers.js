@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
     messages: [
         { id: 1, subject: 'NetSuite is down', isRead: false, isSelected: false, labels: [], isStarred: false },
         { id: 2, subject: 'What We Owe to Each Other', isRead: false, isSelected: false, labels: [], isStarred: false },
@@ -10,11 +10,11 @@ const initialState = {
     ],
 }
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;
     }
 }
 
-export default reducer;
+//export default reducer;
