@@ -1,5 +1,5 @@
 import { initialState, reducer } from './reducers'
-import { UPDATE_MESSAGE, SELECT_ALL } from '../actions/actions'
+import { UPDATE_MESSAGE, SELECT_ALL, MARK_READ } from '../actions/actions'
 import deepFreeze from 'deep-freeze'
 describe('reducer', () => {
     it('should have an initial state', () => {
@@ -57,6 +57,21 @@ describe('reducer', () => {
         expect(actual).toEqual([{ selected: false }, { selected: false }, { selected: false }])
     })
 
-    // it('should evaluate the current messages for selected status', () =>
-    //     )
+    it('markread on messages selected', () => {
+        const originalState = {
+            messages: [
+                { selected: true, read: false },
+                { selected: true, read: false },
+                { selected: false, read: false }
+            ]
+        }
+
+        const action = { type: MARK_READ }
+
+        const actual = reducer(originalState, action).messages
+        expect(actual).toEqual([
+            { selected: true, read: true },
+            { selected: true, read: true },
+            { selected: false, read: false }])
+    })
 })

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../index.css'
 
-const Toolbar = ({ selector, selection }) => {
+const Toolbar = ({ selector, selection, markRead }) => {
 
     const buttonClass = () => {
         if (selection === 'none')
@@ -23,7 +23,7 @@ const Toolbar = ({ selector, selection }) => {
                     <i id="selectAllIcon" className={buttonClass()}></i>
                 </button>
 
-                <button className="btn btn-default" disabled="disabled">
+                <button id="markRead" className="btn btn-default" disabled={(selection === 'none' ? true : false)} onClick={markRead}>
                     Mark As Read
                 </button>
 

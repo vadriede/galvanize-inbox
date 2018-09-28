@@ -1,4 +1,4 @@
-import { UPDATE_MESSAGE, SELECT_ALL } from "../actions/actions";
+import { UPDATE_MESSAGE, SELECT_ALL, MARK_READ } from "../actions/actions";
 
 export const initialState = {
     messages: [
@@ -65,42 +65,30 @@ export const initialState = {
 }
 
 export const reducer = (state = initialState, action) => {
-    let currentSelectionState;
     switch (action.type) {
 
         case UPDATE_MESSAGE:
-            currentSelectionState = getCurrentlySelectedState(state)
-            return ({
-                ...state,
-                messages: state.messages.map((m) => (m.id === action.msg.id) ? action.msg : m),
-                currentSelectionState,
-            })
+            return updateAllTakeAction(state, action)
 
         case SELECT_ALL:
-            currentSelectionState = getCurrentlySelectedState(state)
+            return selectAllTakeAction(state)
 
-            let newMessages;
-            if (currentSelectionState === 'all') {
-                newMessages = state.messages.map((m) => ({ ...m, selected: false }))
-                currentSelectionState = 'none'
-            } else {
-                newMessages = state.messages.map((m) => ({ ...m, selected: true }))
-                currentSelectionState = 'all'
-            }
+        case MARK_READ:
+            return markReadTakeAction(state)
 
-
-            return ({
-                ...state,
-                messages: newMessages,
-                currentSelectionState,
-            })
         default:
             return state;
     }
 }
 
+const markReadTakeAction = (state) => {
+    return ({
+        ...state,
+        messages: state.messages.map((m) => (m.selected ? { ...m, read: true } : m))
+    })
+}
+
 const getCurrentlySelectedState = (state) => {
-    // none, some, all
     const currentlySelected = state.messages.filter((m) => m.selected)
     if (currentlySelected.length === 0) {
         return 'none'
@@ -111,4 +99,30 @@ const getCurrentlySelectedState = (state) => {
     }
 }
 
+const selectAllTakeAction = (state) => {
+    let currentSelectionState = getCurrentlySelectedState(state)
+
+    let newMessages;
+    if (currentSelectionState === 'all') {
+        newMessages = state.messages.map((m) => ({ ...m, selected: false }))
+        currentSelectionState = 'none'
+    } else {
+        newMessages = state.messages.map((m) => ({ ...m, selected: true }))
+        currentSelectionState = 'all'
+    }
+    return ({
+        ...state,
+        messages: newMessages,
+        currentSelectionState,
+    })
+}
+
+const updateAllTakeAction = (state, action) => {
+    const currentSelectionState = getCurrentlySelectedState(state)
+    return ({
+        ...state,
+        messages: state.messages.map((m) => (m.id === action.msg.id) ? action.msg : m),
+        currentSelectionState,
+    })
+}
 //export default reducer;

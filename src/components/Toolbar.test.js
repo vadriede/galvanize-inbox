@@ -48,4 +48,27 @@ describe('test toolbar component', () => {
         expect(toolbarAll.find('#selectAllIcon').hasClass('fa-check-square-o')).toEqual(true)
 
     })
+
+    it('should call the function supplied for markRead', () => {
+        // setup
+        const fakeFunc = jest.fn();
+        const toolbar = shallow(<Toolbar markRead={fakeFunc} />)
+
+        // exercise
+        toolbar.find("#markRead").simulate('click');
+
+        // assert
+        expect(fakeFunc).toHaveBeenCalledTimes(1);
+
+    })
+
+    it('should only have enabled edit buttons when more than zero messages selected', () => {
+        const toolbarNone = shallow(<Toolbar selection='none' />)
+        const toolbarSome = shallow(<Toolbar selection='some' />)
+        const toolbarAll = shallow(<Toolbar selection='all' />)
+
+        expect(toolbarNone.find('#markRead').prop('disabled')).toEqual(true)
+        expect(toolbarSome.find('#markRead').prop('disabled')).toEqual(false)
+        expect(toolbarAll.find('#markRead').prop('disabled')).toEqual(false)
+    })
 })

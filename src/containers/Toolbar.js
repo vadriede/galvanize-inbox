@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/Toolbar'
-import { selectAll } from '../actions/actions';
+import { selectAll, markRead } from '../actions/actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        'selector': (updateTo) => dispatch(selectAll(updateTo))
+        'selector': (updateTo) => dispatch(selectAll(updateTo)),
+        'markRead': () => dispatch(markRead()),
     }
 }
 
