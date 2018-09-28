@@ -1,18 +1,26 @@
 import React from 'react';
 import '../index.css'
 
-const Toolbar = () => {
+const Toolbar = ({ selector, selection }) => {
+
+    const buttonClass = () => {
+        if (selection === 'none')
+            return 'fa fa-square-o'
+        if (selection === 'some')
+            return 'fa fa-minus-square-o'
+        return 'fa fa-check-square-o'
+    }
 
     return (
         <div className="row toolbar">
             <div className="col-md-12">
                 <p className="pull-right">
-                    <span className="badge badge">2</span>
+                    <span id="unreadCount" className="badge badge">2</span>
                     unread messages
                 </p>
 
-                <button className="btn btn-default">
-                    <i className="fa fa-square-o"></i>
+                <button id="selectAll" className="btn btn-default" onClick={selector}>
+                    <i id="selectAllIcon" className={buttonClass()}></i>
                 </button>
 
                 <button className="btn btn-default" disabled="disabled">

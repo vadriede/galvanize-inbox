@@ -1,30 +1,113 @@
-import { UPDATE_MESSAGE } from "../actions/actions";
+import { UPDATE_MESSAGE, SELECT_ALL } from "../actions/actions";
 
 export const initialState = {
     messages: [
-        { id: 1, subject: 'NetSuite is down', isRead: true, isSelected: false, labels: [], isStarred: false },
-        { id: 2, subject: 'What We Owe to Each Other', isRead: false, isSelected: false, labels: [], isStarred: false },
-        { id: 3, subject: 'Crazy idea - flux capacitor', isRead: false, isSelected: false, labels: [], isStarred: false },
-        { id: 4, subject: 'Reqeust for assistance frmo Nigerian Prince', isRead: false, isSelected: false, labels: [], isStarred: false },
-        { id: 5, subject: 'Yo', isRead: false, isSelected: false, labels: [], isStarred: true },
-        { id: 6, subject: 'GDPR request counter update - averaging 2 per year!', isRead: false, isSelected: false, labels: [], isStarred: false },
-        { id: 7, subject: 'the grasshopper lies heavy', isRead: false, isSelected: false, labels: [], isStarred: false },
+        {
+            "id": 1,
+            "subject": "You can't input the protocol without calculating the mobile RSS protocol!",
+            "read": false,
+            "starred": true,
+            "labels": ["dev", "personal"]
+        },
+        {
+            "id": 2,
+            "subject": "connecting the system won't do anything, we need to input the mobile AI panel!",
+            "read": false,
+            "starred": false,
+            "selected": true,
+            "labels": []
+        },
+        {
+            "id": 3,
+            "subject": "Use the 1080p HTTP feed, then you can parse the cross-platform hard drive!",
+            "read": false,
+            "starred": true,
+            "labels": ["dev"]
+        },
+        {
+            "id": 4,
+            "subject": "We need to program the primary TCP hard drive!",
+            "read": true,
+            "starred": false,
+            "selected": true,
+            "labels": []
+        },
+        {
+            "id": 5,
+            "subject": "If we override the interface, we can get to the HTTP feed through the virtual EXE interface!",
+            "read": false,
+            "starred": false,
+            "labels": ["personal"]
+        },
+        {
+            "id": 6,
+            "subject": "We need to back up the wireless GB driver!",
+            "read": true,
+            "starred": true,
+            "labels": []
+        },
+        {
+            "id": 7,
+            "subject": "We need to index the mobile PCI bus!",
+            "read": true,
+            "starred": false,
+            "labels": ["dev", "personal"]
+        },
+        {
+            "id": 8,
+            "subject": "If we connect the sensor, we can get to the HDD port through the redundant IB firewall!",
+            "read": true,
+            "starred": true,
+            "labels": []
+        }
     ],
+    currentSelectionState: "some"
 }
 
 export const reducer = (state = initialState, action) => {
-    console.log('reducer')
+    let currentSelectionState;
     switch (action.type) {
+
         case UPDATE_MESSAGE:
-            console.log('UPDATE_MESSAGE');
-            console.log(action.msg)
+            currentSelectionState = getCurrentlySelectedState(state)
             return ({
                 ...state,
                 messages: state.messages.map((m) => (m.id === action.msg.id) ? action.msg : m),
+                currentSelectionState,
             })
 
+        case SELECT_ALL:
+            currentSelectionState = getCurrentlySelectedState(state)
+
+            let newMessages;
+            if (currentSelectionState === 'all') {
+                newMessages = state.messages.map((m) => ({ ...m, selected: false }))
+                currentSelectionState = 'none'
+            } else {
+                newMessages = state.messages.map((m) => ({ ...m, selected: true }))
+                currentSelectionState = 'all'
+            }
+
+
+            return ({
+                ...state,
+                messages: newMessages,
+                currentSelectionState,
+            })
         default:
             return state;
+    }
+}
+
+const getCurrentlySelectedState = (state) => {
+    // none, some, all
+    const currentlySelected = state.messages.filter((m) => m.selected)
+    if (currentlySelected.length === 0) {
+        return 'none'
+    } else if (currentlySelected.length < state.messages.length) {
+        return 'some'
+    } else {
+        return 'all'
     }
 }
 

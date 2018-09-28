@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        'starMessage': (msg) => dispatch(updateMessage(msg)),
+        'updateMessage': (msg) => dispatch(updateMessage(msg)),
     }
 }
 
