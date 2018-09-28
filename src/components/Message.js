@@ -7,16 +7,16 @@ const Message = ({ message }) => {
             <div class="col-xs-1">
                 <div class="row">
                     <div class="col-xs-2">
-                        <input type="checkbox" />
+                        <input id='isSelected' type="checkbox" />
                     </div>
                     <div class="col-xs-2">
-                        <i class="star fa fa-star"></i>
+                        <i id='isStarred' class="star fa fa-star"></i>
                     </div>
                 </div>
             </div>
             <div class="col-xs-11">
-                <span class="label label-warning">dev</span>
-                <span class="label label-warning">gschool</span>
+                <span id='label' class="label label-warning">dev</span>
+                <span id='label' class="label label-warning">gschool</span>
                 <a id="subject" href="#">
                     {message.subject}
                 </a>
