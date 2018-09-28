@@ -1,10 +1,10 @@
 import React from 'react';
 
-const MessageList = () => {
+const Message = ({ message }) => {
     return (
-        <div>
-
+        <div className="message">
+            {message.subject}
         </div>
     )
 }
-export default MessageList
+export default Message;

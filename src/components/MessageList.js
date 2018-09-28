@@ -1,20 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Message from './Message';
+import '../index.css'
 
 
 const MessageList = ({ messages }) => {
     return (
         <div>
-            {messages.map((m) => <li key={m.id}><Message message={m} /></li>)}
+            {messages.map((m) => <Message className="message" message={m} />)}
         </div>
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        messages: state.messages,
-    }
-}
 
-export default connect(mapStateToProps)(MessageList)
+export default MessageList
