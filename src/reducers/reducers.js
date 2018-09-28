@@ -1,3 +1,5 @@
+import { UPDATE_MESSAGE } from "../actions/actions";
+
 export const initialState = {
     messages: [
         { id: 1, subject: 'NetSuite is down', isRead: true, isSelected: false, labels: [], isStarred: false },
@@ -11,7 +13,16 @@ export const initialState = {
 }
 
 export const reducer = (state = initialState, action) => {
+    console.log('reducer')
     switch (action.type) {
+        case UPDATE_MESSAGE:
+            console.log('UPDATE_MESSAGE');
+            console.log(action.msg)
+            return ({
+                ...state,
+                messages: state.messages.map((m) => (m.id === action.msg.id) ? action.msg : m),
+            })
+
         default:
             return state;
     }

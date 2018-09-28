@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import MessageList from './MessageList';
-import Message from './Message';
+import Message from '../containers/Message';
 
 describe('MessageList', () => {
     it('renders a list of messages', () => {

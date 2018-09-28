@@ -59,4 +59,32 @@ describe('Message', () => {
         expect(messageLabeledNone.find('#label')).toHaveLength(msgLabeledNone.labels.length)
         expect(messageLabeledMultiple.find('#label')).toHaveLength(msgLabeledMultiple.labels.length)
     })
+
+    describe('starMessage', () => {
+        it('should call the passed in starMessage function when star is clicked', () => {
+            // setup
+            const msg = {
+                id: 1,
+                subject: 'abdfe',
+                isRead: false,
+                isSelected: true,
+                labels: ['dev'],
+                isStarred: true
+            }
+            const fakeStarMessage = jest.fn();
+            const mess = shallow(<Message message={msg} starMessage={fakeStarMessage} />)
+
+            // exercise
+            mess.find('#isStarred').simulate('click');
+
+            // assert
+            expect(fakeStarMessage).toHaveBeenCalledWith(
+                {
+                    ...msg,
+                    isStarred: false,
+                }
+            )
+        })
+
+    })
 })

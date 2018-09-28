@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Message = ({ message }) => {
+const Message = ({ message, starMessage }) => {
+
+    const clickStar = () => {
+        // console.log('clickStar')
+        message.isStarred = !message.isStarred
+        starMessage(message);
+    }
+
     return (
 
         <div className={'row message' +
@@ -13,7 +20,7 @@ const Message = ({ message }) => {
                     </div>
                     <div className="col-xs-2">
                         <i id='isStarred' className={'star fa' +
-                            (message.isStarred ? ' fa-star' : ' fa-star-o')}></i>
+                            (message.isStarred ? ' fa-star' : ' fa-star-o')} onClick={clickStar}></i>
                     </div>
                 </div>
             </div>
