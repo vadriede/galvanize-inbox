@@ -1,12 +1,15 @@
 import React from 'react';
 import Message from './Message';
+import '../index.css'
+
 
 const MessageList = ({ messages }) => {
     return (
-        <div>
-            {messages.map((m) => <li key={m.id}><Message message={m} /></li>)}
-        </div>
+        <ul>
+            {messages.map((m) => <Message key={m.id} className="message" message={m} />)}
+        </ul>
     )
 }
+
 
 export default MessageList
