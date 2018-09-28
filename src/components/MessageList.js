@@ -5,9 +5,9 @@ import '../index.css'
 
 const MessageList = ({ messages }) => {
     return (
-        <div>
-            {messages.map((m) => <Message className="message" message={m} />)}
-        </div>
+        <ul>
+            {messages.map((m) => <Message key={m.id} className="message" message={m} />)}
+        </ul>
     )
 }
 
