@@ -3,7 +3,6 @@ import React from 'react';
 const Message = ({ message, starMessage }) => {
 
     const clickStar = () => {
-        // console.log('clickStar')
         message.isStarred = !message.isStarred
         starMessage(message);
     }

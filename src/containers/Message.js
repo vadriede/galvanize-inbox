@@ -4,6 +4,7 @@ import { updateMessage } from '../actions/actions';
 
 const mapStateToProps = (state) => {
     return {
+        messages: state.messages,
     }
 }
 
