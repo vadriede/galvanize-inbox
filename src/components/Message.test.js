@@ -9,6 +9,6 @@ describe('Message', () => {
         const message = shallow(<Message message={msg} />)
 
         // assert
-        expect(message.find('div').text()).toEqual(msg.subject);
+        expect(message.find('#subject').text()).toEqual(msg.subject);
     })
 })
