@@ -61,7 +61,8 @@ export const initialState = {
             "labels": []
         }
     ],
-    currentSelectionState: "some"
+    currentSelectionState: "some",
+    unreadCount: 4
 }
 
 export const reducer = (state = initialState, action) => {
@@ -75,7 +76,8 @@ export const reducer = (state = initialState, action) => {
 
         case actionTypes.MARK_READ:
             return markReadTakeAction(state, action)
-
+        case actionTypes.COUNT_UNREAD:
+            return countUnreadTakeAction(state)
         default:
             return state;
     }
@@ -125,5 +127,12 @@ const markReadTakeAction = (state, action) => {
     return ({
         ...state,
         messages: state.messages.map((m) => (m.selected ? { ...m, read: action.payload } : m))
+    })
+}
+
+const countUnreadTakeAction = (state) => {
+    return ({
+        ...state,
+        unreadCount: state.messages.filter((m) => !m.read).length,
     })
 }

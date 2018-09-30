@@ -53,8 +53,10 @@ describe('test toolbar component', () => {
         // setup
         const fakeFunc = jest.fn();
         const fakeFuncUnread = jest.fn();
-        const toolbar = shallow(<Toolbar markRead={fakeFunc} />)
-        const toolbarUnread = shallow(<Toolbar markRead={fakeFuncUnread} />)
+        const countUnread1 = jest.fn();
+        const countUnread2 = jest.fn();
+        const toolbar = shallow(<Toolbar markRead={fakeFunc} countUnread={countUnread1} />)
+        const toolbarUnread = shallow(<Toolbar markRead={fakeFuncUnread} countUnread={countUnread2} />)
 
 
         // exercise
@@ -65,6 +67,8 @@ describe('test toolbar component', () => {
         expect(fakeFunc).toHaveBeenCalledTimes(1);
         expect(fakeFunc).toHaveBeenCalledWith(true);
         expect(fakeFuncUnread).toHaveBeenCalledWith(false);
+        expect(countUnread1).toHaveBeenCalledTimes(1);
+        expect(countUnread2).toHaveBeenCalledTimes(1);
 
     })
 
@@ -76,5 +80,11 @@ describe('test toolbar component', () => {
         expect(toolbarNone.find('#markRead').prop('disabled')).toEqual(true)
         expect(toolbarSome.find('#markRead').prop('disabled')).toEqual(false)
         expect(toolbarAll.find('#markRead').prop('disabled')).toEqual(false)
+    })
+
+    it('should display the current count of unread messages', () => {
+        const toolbar = shallow(<Toolbar unreadCount='4' />)
+
+        expect(toolbar.find('#unreadCount').text()).toEqual('4')
     })
 })

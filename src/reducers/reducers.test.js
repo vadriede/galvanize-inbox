@@ -1,5 +1,5 @@
 import { initialState, reducer } from './reducers'
-import { actionTypes } from '../actions/actions'
+import { actionTypes, countUnread } from '../actions/actions'
 import deepFreeze from 'deep-freeze'
 describe('reducer', () => {
     it('should have an initial state', () => {
@@ -14,9 +14,6 @@ describe('reducer', () => {
             messages: [{ id: 1, subject: 'NetSuite is down', isRead: true, isSelected: false, labels: [], isStarred: false }]
         }
         deepFreeze(originalState)
-
-        // msg.isStarred = !msg.isStarred
-        // console.log('originalState:', originalState)
 
         const action = {
             type: actionTypes.UPDATE_MESSAGE,
@@ -36,7 +33,6 @@ describe('reducer', () => {
 
         const action = {
             type: actionTypes.SELECT_ALL,
-            // payload: true
         }
 
         const actual = reducer(originalState, action).messages
@@ -50,7 +46,6 @@ describe('reducer', () => {
 
         const action = {
             type: actionTypes.SELECT_ALL,
-            // payload: false
         }
 
         const actual = reducer(originalState, action).messages
@@ -92,5 +87,26 @@ describe('reducer', () => {
             { selected: true, read: false },
             { selected: false, read: true }
         ])
+    })
+
+    it('updates unread count when COUNT_UNREAD action triggered', () => {
+        // setup
+        const expected = 1
+        const originalState = {
+            messages: [
+                { read: true, },
+                { read: false, },
+                { read: true }
+            ],
+            unreadCount: 3,
+        }
+        deepFreeze(originalState)
+        const action = countUnread();
+
+        // exercise
+        const actual = reducer(originalState, action).unreadCount
+
+        // assert
+        expect(actual).toEqual(expected);
     })
 })

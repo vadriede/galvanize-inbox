@@ -1,11 +1,12 @@
 import React from 'react';
 import '../index.css'
 
-const Toolbar = ({ selector, selection, markRead }) => {
+const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) => {
 
     const clickRead = (isRead) => {
         return () => {
-            markRead(isRead)
+            markRead(isRead);
+            countUnread();
         }
     }
 
@@ -21,7 +22,7 @@ const Toolbar = ({ selector, selection, markRead }) => {
         <div className="row toolbar">
             <div className="col-md-12">
                 <p className="pull-right">
-                    <span id="unreadCount" className="badge badge">2</span>
+                    <span id="unreadCount" className="badge badge">{unreadCount}</span>
                     unread messages
                 </p>
 
