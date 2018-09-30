@@ -1,7 +1,14 @@
 import React from 'react';
 import '../index.css'
 
-const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) => {
+const Toolbar = ({
+    selector,
+    selection,
+    markRead,
+    unreadCount,
+    countUnread,
+    deleteMessage
+}) => {
 
     const clickRead = (isRead) => {
         return () => {
@@ -54,7 +61,7 @@ const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) =>
                     <option value="gschool">gschool</option>
                 </select>
 
-                <button className="btn btn-default" disabled={buttonsEnabled()}>
+                <button className="btn btn-default" id='deleteBtn' disabled={buttonsEnabled()} onClick={deleteMessage}>
                     <i className="fa fa-trash-o"></i>
                 </button>
             </div>

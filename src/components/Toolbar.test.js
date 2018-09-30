@@ -87,4 +87,16 @@ describe('test toolbar component', () => {
 
         expect(toolbar.find('#unreadCount').text()).toEqual('4')
     })
+
+    it('should call the delete function when the delete button is pushed', () => {
+        // setup
+        const fake = jest.fn();
+        const toolbar = shallow(<Toolbar deleteMessage={fake} />);
+
+        // exercise
+        toolbar.find('#deleteBtn').simulate('click');
+
+        // assert
+        expect(fake).toHaveBeenCalledTimes(1);
+    })
 })
