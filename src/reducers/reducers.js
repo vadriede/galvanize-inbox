@@ -161,5 +161,12 @@ const updateSelectionState = (state) => {
 }
 
 const addLabelTakeAction = (state, action) => {
-    return state
+    let newState = JSON.parse(JSON.stringify(state))
+    newState.messages = newState.messages.map((m) => {
+        if (m.selected && m.labels.findIndex((l) => l === action.label) == -1) {
+            m.labels.push(action.label)
+        }
+        return m
+    })
+    return newState
 }
