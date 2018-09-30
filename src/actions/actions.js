@@ -3,6 +3,7 @@ export const actionTypes = {
     SELECT_ALL: 'SELECT_ALL',
     MARK_READ: 'MARK_READ',
     COUNT_UNREAD: 'COUNT_UNREAD',
+    DELETE_MESSAGES: 'DELETE_MESSAGES',
 }
 
 export const updateMessage = (msg) => {
@@ -14,3 +15,5 @@ export const selectAll = (buttonState) => ({ type: actionTypes.SELECT_ALL, paylo
 export const markRead = (isRead) => ({ type: actionTypes.MARK_READ, payload: isRead })
 
 export const countUnread = () => ({ type: actionTypes.COUNT_UNREAD })
+
+export const deleteMessages = () => ({ type: actionTypes.DELETE_MESSAGES })

@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
         'selector': (updateTo) => dispatch(selectAll(updateTo)),
         'markRead': (isRead) => dispatch(markRead(isRead)),
         'countUnread': () => dispatch(countUnread()),
-        'deleteMessages': () => dispatch(deleteMessages),
+        'deleteMessages': () => dispatch(deleteMessages()),
     }
 }
 
