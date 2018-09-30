@@ -133,6 +133,6 @@ const markReadTakeAction = (state, action) => {
 const countUnreadTakeAction = (state) => {
     return ({
         ...state,
-        unreadCount: state.messages.filter((m) => !m.read).length,
+        unreadCount: state.messages.reduce((acc, m) => (m.read ? acc : acc + 1), 0)
     })
 }
