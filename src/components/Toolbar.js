@@ -23,7 +23,7 @@ const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) =>
             <div className="col-md-12">
                 <p className="pull-right">
                     <span id="unreadCount" className="badge badge">{unreadCount}</span>
-                    unread messages
+                    {'unread message' + (unreadCount != 1 ? 's' : '')}
                 </p>
 
                 <button id="selectAll" className="btn btn-default" onClick={selector}>
