@@ -3,6 +3,12 @@ import '../index.css'
 
 const Toolbar = ({ selector, selection, markRead }) => {
 
+    const clickRead = (isRead) => {
+        return () => {
+            markRead(isRead)
+        }
+    }
+
     const buttonClass = () => {
         if (selection === 'none')
             return 'fa fa-square-o'
@@ -23,11 +29,11 @@ const Toolbar = ({ selector, selection, markRead }) => {
                     <i id="selectAllIcon" className={buttonClass()}></i>
                 </button>
 
-                <button id="markRead" className="btn btn-default" disabled={(selection === 'none' ? true : false)} onClick={markRead}>
+                <button id="markRead" className="btn btn-default" disabled={(selection === 'none' ? true : false)} onClick={clickRead(true)}>
                     Mark As Read
                 </button>
 
-                <button className="btn btn-default" disabled="disabled">
+                <button className="btn btn-default" disabled={(selection === 'none' ? true : false)}>
                     Mark As Unread
                 </button>
 

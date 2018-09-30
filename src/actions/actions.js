@@ -7,4 +7,4 @@ export const updateMessage = (msg) => {
 
 export const selectAll = (buttonState) => ({ type: SELECT_ALL, payload: buttonState })
 
-export const markRead = () => ({ type: MARK_READ })
+export const markRead = (isRead) => ({ type: MARK_READ, payload: isRead })

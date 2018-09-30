@@ -74,17 +74,19 @@ export const reducer = (state = initialState, action) => {
             return selectAllTakeAction(state)
 
         case MARK_READ:
-            return markReadTakeAction(state)
+            return markReadTakeAction(state, action)
 
         default:
             return state;
     }
 }
 
-const markReadTakeAction = (state) => {
+const updateAllTakeAction = (state, action) => {
+    const currentSelectionState = getCurrentlySelectedState(state)
     return ({
         ...state,
-        messages: state.messages.map((m) => (m.selected ? { ...m, read: true } : m))
+        messages: state.messages.map((m) => (m.id === action.msg.id) ? action.msg : m),
+        currentSelectionState,
     })
 }
 
@@ -117,12 +119,11 @@ const selectAllTakeAction = (state) => {
     })
 }
 
-const updateAllTakeAction = (state, action) => {
-    const currentSelectionState = getCurrentlySelectedState(state)
+
+
+const markReadTakeAction = (state, action) => {
     return ({
         ...state,
-        messages: state.messages.map((m) => (m.id === action.msg.id) ? action.msg : m),
-        currentSelectionState,
+        messages: state.messages.map((m) => (m.selected ? { ...m, read: action.payload } : m))
     })
 }
-//export default reducer;

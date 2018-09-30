@@ -57,7 +57,7 @@ describe('reducer', () => {
         expect(actual).toEqual([{ selected: false }, { selected: false }, { selected: false }])
     })
 
-    it('markread on messages selected', () => {
+    it('updates read state on messages selected', () => {
         const originalState = {
             messages: [
                 { selected: true, read: false },
@@ -65,13 +65,24 @@ describe('reducer', () => {
                 { selected: false, read: false }
             ]
         }
+        const originalStateToUnread = {
+            messages: [
+                { selected: true, read: true },
+                { selected: true, read: true },
+                { selected: true, read: false },
+                { selected: false, read: true }
+            ]
+        }
+        deepFreeze(originalStateToUnread)
 
-        const action = { type: MARK_READ }
+        const actionToUnread = { type: MARK_READ, payload: false }
 
-        const actual = reducer(originalState, action).messages
+        const actual = reducer(originalStateToUnread, actionToUnread).messages
         expect(actual).toEqual([
-            { selected: true, read: true },
-            { selected: true, read: true },
-            { selected: false, read: false }])
+            { selected: true, read: false },
+            { selected: true, read: false },
+            { selected: true, read: false },
+            { selected: false, read: true }
+        ])
     })
 })
