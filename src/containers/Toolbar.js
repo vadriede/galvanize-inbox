@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         'selector': (updateTo) => dispatch(selectAll(updateTo)),
-        'markRead': () => dispatch(markRead()),
+        'markRead': (isRead) => dispatch(markRead(isRead)),
     }
 }
 

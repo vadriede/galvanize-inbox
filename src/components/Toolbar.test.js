@@ -49,16 +49,22 @@ describe('test toolbar component', () => {
 
     })
 
-    it('should call the function supplied for markRead', () => {
+    it('should call the function supplied for markRead with parameter for read/unread', () => {
         // setup
         const fakeFunc = jest.fn();
+        const fakeFuncUnread = jest.fn();
         const toolbar = shallow(<Toolbar markRead={fakeFunc} />)
+        const toolbarUnread = shallow(<Toolbar markRead={fakeFuncUnread} />)
+
 
         // exercise
         toolbar.find("#markRead").simulate('click');
+        toolbarUnread.find("#markUnread").simulate('click');
 
         // assert
         expect(fakeFunc).toHaveBeenCalledTimes(1);
+        expect(fakeFunc).toHaveBeenCalledWith(true);
+        expect(fakeFuncUnread).toHaveBeenCalledWith(false);
 
     })
 

@@ -33,7 +33,7 @@ const Toolbar = ({ selector, selection, markRead }) => {
                     Mark As Read
                 </button>
 
-                <button className="btn btn-default" disabled={(selection === 'none' ? true : false)}>
+                <button id="markUnread" className="btn btn-default" disabled={(selection === 'none' ? true : false)} onClick={clickRead(false)}>
                     Mark As Unread
                 </button>
 

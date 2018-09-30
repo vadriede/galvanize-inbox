@@ -122,6 +122,7 @@ const selectAllTakeAction = (state) => {
 
 
 const markReadTakeAction = (state, action) => {
+    console.log('markReadTakeAction', JSON.stringify(action))
     return ({
         ...state,
         messages: state.messages.map((m) => (m.selected ? { ...m, read: action.payload } : m))
