@@ -10,6 +10,8 @@ const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) =>
         }
     }
 
+    const buttonsEnabled = () => (selection === 'none' ? true : false)
+
     const buttonClass = () => {
         if (selection === 'none')
             return 'fa fa-square-o'
@@ -30,11 +32,11 @@ const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) =>
                     <i id="selectAllIcon" className={buttonClass()}></i>
                 </button>
 
-                <button id="markRead" className="btn btn-default" disabled={(selection === 'none' ? true : false)} onClick={clickRead(true)}>
+                <button id="markRead" className="btn btn-default" disabled={buttonsEnabled()} onClick={clickRead(true)}>
                     Mark As Read
                 </button>
 
-                <button id="markUnread" className="btn btn-default" disabled={(selection === 'none' ? true : false)} onClick={clickRead(false)}>
+                <button id="markUnread" className="btn btn-default" disabled={buttonsEnabled()} onClick={clickRead(false)}>
                     Mark As Unread
                 </button>
 
@@ -52,7 +54,7 @@ const Toolbar = ({ selector, selection, markRead, unreadCount, countUnread }) =>
                     <option value="gschool">gschool</option>
                 </select>
 
-                <button className="btn btn-default" disabled="disabled">
+                <button className="btn btn-default" disabled={buttonsEnabled()}>
                     <i className="fa fa-trash-o"></i>
                 </button>
             </div>
