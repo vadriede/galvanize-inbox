@@ -167,4 +167,52 @@ describe('reducer', () => {
             { selected: true, labels: ['dev'] },
         ])
     })
+
+    it('adds a submitted label where needed on selected messages when ADD_LABEL fired', () => {
+        // setup
+        const action = { type: actionTypes.ADD_LABEL, label: 'dev' }
+        const originalState = {
+            messages: [
+                { selected: true, labels: [] },
+                { selected: true, labels: ['cdc'] },
+                { selected: false, labels: [] },
+                { selected: true, labels: ['dev'] },
+            ]
+        }
+
+        // exercise
+        const actual = reducer(originalState, action)
+
+        // assert
+        expect(actual.messages).toEqual([
+            { selected: true, labels: ['dev'] },
+            { selected: true, labels: ['cdc', 'dev'] },
+            { selected: false, labels: [] },
+            { selected: true, labels: ['dev'] },
+        ])
+    })
+
+    it('removes a submitted label where needed on selected messages when REMOVE_LABEL fired', () => {
+        // setup
+        const action = { type: actionTypes.REMOVE_LABEL, label: 'dev' }
+        const originalState = {
+            messages: [
+                { selected: true, labels: ['dev'] },
+                { selected: true, labels: ['cdc'] },
+                { selected: false, labels: ['dev'] },
+                { selected: true, labels: ['dev', 'other'] },
+            ]
+        }
+
+        // exercise
+        const actual = reducer(originalState, action)
+
+        // assert
+        expect(actual.messages).toEqual([
+            { selected: true, labels: [] },
+            { selected: true, labels: ['cdc'] },
+            { selected: false, labels: ['dev'] },
+            { selected: true, labels: ['other'] },
+        ])
+    })
 })

@@ -112,4 +112,17 @@ describe('test toolbar component', () => {
         expect(fake).toHaveBeenCalledTimes(1)
         expect(fake).toHaveBeenCalledWith({ target: { value: 'dev' } })
     })
+
+    it('should call the removeLabel function when the Remove Label button is pushed', () => {
+        // setup
+        const fake = jest.fn();
+        const toolbar = shallow(<Toolbar removeLabel={fake} />)
+
+        // exercise
+        toolbar.find('#removeLabel').simulate('change', { target: { value: 'dev' } })
+
+        // assert
+        expect(fake).toHaveBeenCalledTimes(1)
+        expect(fake).toHaveBeenCalledWith({ target: { value: 'dev' } })
+    })
 })

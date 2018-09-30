@@ -9,6 +9,7 @@ const Toolbar = ({
     countUnread,
     deleteMessages,
     addLabel,
+    removeLabel,
 }) => {
 
     const clickRead = (isRead) => {
@@ -55,7 +56,7 @@ const Toolbar = ({
                     <option value="gschool">gschool</option>
                 </select>
 
-                <select className="form-control label-select" disabled={buttonsEnabled()}>
+                <select id='removeLabel' onChange={removeLabel} className="form-control label-select" disabled={buttonsEnabled()}>
                     <option>Remove label</option>
                     <option value="dev">dev</option>
                     <option value="personal">personal</option>

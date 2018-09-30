@@ -89,6 +89,9 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.ADD_LABEL:
             return addLabelTakeAction(state, action)
 
+        case actionTypes.REMOVE_LABEL:
+            return removeLabelTakeAction(state, action)
+
         default:
             return state;
     }
@@ -165,6 +168,17 @@ const addLabelTakeAction = (state, action) => {
     newState.messages = newState.messages.map((m) => {
         if (m.selected && m.labels.findIndex((l) => l === action.label) == -1) {
             m.labels.push(action.label)
+        }
+        return m
+    })
+    return newState
+}
+
+const removeLabelTakeAction = (state, action) => {
+    let newState = JSON.parse(JSON.stringify(state))
+    newState.messages = newState.messages.map((m) => {
+        if (m.selected) {
+            return { ...m, labels: m.labels.filter((l) => l !== action.label) }
         }
         return m
     })
