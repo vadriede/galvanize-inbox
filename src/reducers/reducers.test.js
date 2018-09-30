@@ -1,6 +1,7 @@
 import { initialState, reducer } from './reducers'
 import { actionTypes, countUnread } from '../actions/actions'
 import deepFreeze from 'deep-freeze'
+import Toolbar from '../containers/Toolbar';
 describe('reducer', () => {
     it('should have an initial state', () => {
         const actual = reducer(undefined, {});
@@ -141,5 +142,29 @@ describe('reducer', () => {
         // assert
         expect(actual.messages).toEqual([{ id: 3, selected: false }])
 
+    })
+
+    it('adds a submitted label where needed on selected messages when ADD_LABEL fired', () => {
+        // setup
+        const action = { type: actionTypes.ADD_LABEL, label: 'dev' }
+        const originalState = {
+            messages: [
+                { selected: true, labels: [] },
+                { selected: true, labels: ['cdc'] },
+                { selected: false, labels: [] },
+                { selected: true, labels: ['dev'] },
+            ]
+        }
+
+        // exercise
+        const actual = reducer(originalState, action)
+
+        // assert
+        expect(actual.messages).toEqual([
+            { selected: true, labels: ['dev'] },
+            { selected: true, labels: ['cdc', 'dev'] },
+            { selected: false, labels: [] },
+            { selected: true, labels: ['dev'] },
+        ])
     })
 })

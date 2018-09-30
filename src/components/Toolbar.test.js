@@ -99,4 +99,17 @@ describe('test toolbar component', () => {
         // assert
         expect(fake).toHaveBeenCalledTimes(1);
     })
+
+    it('should call the addLabel function when the addLabel button is pushed', () => {
+        // setup
+        const fake = jest.fn();
+        const toolbar = shallow(<Toolbar addLabel={fake} />)
+
+        // exercise
+        toolbar.find('#addLabel').simulate('change', { target: { value: 'dev' } })
+
+        // assert
+        expect(fake).toHaveBeenCalledTimes(1)
+        expect(fake).toHaveBeenCalledWith({ target: { value: 'dev' } })
+    })
 })

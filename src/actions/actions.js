@@ -5,6 +5,7 @@ export const actionTypes = {
     COUNT_UNREAD: 'COUNT_UNREAD',
     DELETE_MESSAGES: 'DELETE_MESSAGES',
     UPDATE_SELECTION_STATE: 'UPDATE_SELECTION_STATE',
+    ADD_LABEL: 'ADD_LABEL',
 }
 
 export const updateMessage = (msg) => {
@@ -20,3 +21,5 @@ export const countUnread = () => ({ type: actionTypes.COUNT_UNREAD })
 export const deleteMessages = () => ({ type: actionTypes.DELETE_MESSAGES })
 
 export const updateSelectionState = () => ({ type: actionTypes.UPDATE_SELECTION_STATE })
+
+export const addLabel = (label) => ({ type: actionTypes.ADD_LABEL, label })

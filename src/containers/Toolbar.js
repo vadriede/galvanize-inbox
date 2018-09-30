@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/Toolbar'
-import { selectAll, markRead, countUnread, deleteMessages, updateSelectionState } from '../actions/actions';
+import { selectAll, markRead, countUnread, deleteMessages, updateSelectionState, addLabel } from '../actions/actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(countUnread())
             dispatch(updateSelectionState())
         },
+        'addLabel': (event) => dispatch(addLabel(event.target.value))
     }
 }
 

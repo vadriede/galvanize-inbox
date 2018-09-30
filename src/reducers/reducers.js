@@ -86,6 +86,9 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.UPDATE_SELECTION_STATE:
             return updateSelectionState(state)
 
+        case actionTypes.ADD_LABEL:
+            return addLabelTakeAction(state, action)
+
         default:
             return state;
     }
@@ -155,4 +158,8 @@ const updateSelectionState = (state) => {
         ...state,
         currentSelectionState: getCurrentlySelectedState(state)
     })
+}
+
+const addLabelTakeAction = (state, action) => {
+    return state
 }
