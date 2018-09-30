@@ -7,7 +7,7 @@ const Toolbar = ({
     markRead,
     unreadCount,
     countUnread,
-    deleteMessage
+    deleteMessages,
 }) => {
 
     const clickRead = (isRead) => {
@@ -61,7 +61,7 @@ const Toolbar = ({
                     <option value="gschool">gschool</option>
                 </select>
 
-                <button className="btn btn-default" id='deleteBtn' disabled={buttonsEnabled()} onClick={deleteMessage}>
+                <button className="btn btn-default" id='deleteBtn' disabled={buttonsEnabled()} onClick={deleteMessages}>
                     <i className="fa fa-trash-o"></i>
                 </button>
             </div>

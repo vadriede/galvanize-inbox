@@ -91,7 +91,7 @@ describe('test toolbar component', () => {
     it('should call the delete function when the delete button is pushed', () => {
         // setup
         const fake = jest.fn();
-        const toolbar = shallow(<Toolbar deleteMessage={fake} />);
+        const toolbar = shallow(<Toolbar deleteMessages={fake} />);
 
         // exercise
         toolbar.find('#deleteBtn').simulate('click');
