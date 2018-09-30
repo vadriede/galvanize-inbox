@@ -109,4 +109,37 @@ describe('reducer', () => {
         // assert
         expect(actual).toEqual(expected);
     })
+
+    it('deletes any selected messages when the DELETE_MESSAGES action is triggered', () => {
+        // setup
+        const originalState = {
+            messages: [
+                {
+                    id: 1,
+                    selected: true,
+                },
+                {
+                    id: 2,
+                    selected: true,
+                },
+                {
+                    id: 3,
+                    selected: false,
+                },
+                {
+                    id: 4,
+                    selected: true,
+                },
+            ]
+        }
+        deepFreeze(originalState);
+        const action = { type: actionTypes.DELETE_MESSAGES }
+
+        // exercise
+        const actual = reducer(originalState, action)
+
+        // assert
+        expect(actual.messages).toEqual([{ id: 3, selected: false }])
+
+    })
 })

@@ -76,8 +76,16 @@ export const reducer = (state = initialState, action) => {
 
         case actionTypes.MARK_READ:
             return markReadTakeAction(state, action)
+
         case actionTypes.COUNT_UNREAD:
             return countUnreadTakeAction(state)
+
+        case actionTypes.DELETE_MESSAGES:
+            return deleteMessagesTakeAction(state)
+
+        case actionTypes.UPDATE_SELECTION_STATE:
+            return updateSelectionState(state)
+
         default:
             return state;
     }
@@ -121,8 +129,6 @@ const selectAllTakeAction = (state) => {
     })
 }
 
-
-
 const markReadTakeAction = (state, action) => {
     return ({
         ...state,
@@ -134,5 +140,19 @@ const countUnreadTakeAction = (state) => {
     return ({
         ...state,
         unreadCount: state.messages.reduce((acc, m) => (m.read ? acc : acc + 1), 0)
+    })
+}
+
+const deleteMessagesTakeAction = (state) => {
+    return ({
+        ...state,
+        messages: state.messages.filter((m) => !m.selected)
+    })
+}
+
+const updateSelectionState = (state) => {
+    return ({
+        ...state,
+        currentSelectionState: getCurrentlySelectedState(state)
     })
 }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Toolbar from '../components/Toolbar'
-import { selectAll, markRead, countUnread } from '../actions/actions';
+import { selectAll, markRead, countUnread, deleteMessages, updateSelectionState } from '../actions/actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,7 +14,11 @@ const mapDispatchToProps = (dispatch) => {
         'selector': (updateTo) => dispatch(selectAll(updateTo)),
         'markRead': (isRead) => dispatch(markRead(isRead)),
         'countUnread': () => dispatch(countUnread()),
-        'deleteMessages': () => dispatch(deleteMessages()),
+        'deleteMessages': () => {
+            dispatch(deleteMessages())
+            dispatch(countUnread())
+            dispatch(updateSelectionState())
+        },
     }
 }
 

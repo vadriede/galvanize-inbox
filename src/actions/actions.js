@@ -4,6 +4,7 @@ export const actionTypes = {
     MARK_READ: 'MARK_READ',
     COUNT_UNREAD: 'COUNT_UNREAD',
     DELETE_MESSAGES: 'DELETE_MESSAGES',
+    UPDATE_SELECTION_STATE: 'UPDATE_SELECTION_STATE',
 }
 
 export const updateMessage = (msg) => {
@@ -17,3 +18,5 @@ export const markRead = (isRead) => ({ type: actionTypes.MARK_READ, payload: isR
 export const countUnread = () => ({ type: actionTypes.COUNT_UNREAD })
 
 export const deleteMessages = () => ({ type: actionTypes.DELETE_MESSAGES })
+
+export const updateSelectionState = () => ({ type: actionTypes.UPDATE_SELECTION_STATE })
