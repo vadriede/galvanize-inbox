@@ -1,10 +1,13 @@
-export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
-export const MARK_READ = 'MARK_READ'
-export const SELECT_ALL = 'SELECT_ALL'
-export const updateMessage = (msg) => {
-    return { type: UPDATE_MESSAGE, msg }
+export const actionTypes = {
+    UPDATE_MESSAGE: 'UPDATE_MESSAGE',
+    SELECT_ALL: 'SELECT_ALL',
+    MARK_READ: 'MARK_READ',
 }
 
-export const selectAll = (buttonState) => ({ type: SELECT_ALL, payload: buttonState })
+export const updateMessage = (msg) => {
+    return { type: actionTypes.UPDATE_MESSAGE, msg }
+}
 
-export const markRead = (isRead) => ({ type: MARK_READ, payload: isRead })
+export const selectAll = (buttonState) => ({ type: actionTypes.SELECT_ALL, payload: buttonState })
+
+export const markRead = (isRead) => ({ type: actionTypes.MARK_READ, payload: isRead })

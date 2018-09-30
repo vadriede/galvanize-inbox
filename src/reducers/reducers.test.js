@@ -1,5 +1,5 @@
 import { initialState, reducer } from './reducers'
-import { UPDATE_MESSAGE, SELECT_ALL, MARK_READ } from '../actions/actions'
+import { actionTypes } from '../actions/actions'
 import deepFreeze from 'deep-freeze'
 describe('reducer', () => {
     it('should have an initial state', () => {
@@ -19,7 +19,7 @@ describe('reducer', () => {
         // console.log('originalState:', originalState)
 
         const action = {
-            type: UPDATE_MESSAGE,
+            type: actionTypes.UPDATE_MESSAGE,
             msg
         }
 
@@ -35,7 +35,7 @@ describe('reducer', () => {
         deepFreeze(originalState)
 
         const action = {
-            type: SELECT_ALL,
+            type: actionTypes.SELECT_ALL,
             // payload: true
         }
 
@@ -49,7 +49,7 @@ describe('reducer', () => {
         deepFreeze(originalState)
 
         const action = {
-            type: SELECT_ALL,
+            type: actionTypes.SELECT_ALL,
             // payload: false
         }
 
@@ -73,12 +73,20 @@ describe('reducer', () => {
                 { selected: false, read: true }
             ]
         }
+        deepFreeze(originalState)
         deepFreeze(originalStateToUnread)
 
-        const actionToUnread = { type: MARK_READ, payload: false }
+        const action = { type: actionTypes.MARK_READ, payload: true }
+        const actionToUnread = { type: actionTypes.MARK_READ, payload: false }
 
-        const actual = reducer(originalStateToUnread, actionToUnread).messages
+        const actual = reducer(originalState, action).messages;
+        const actualUnread = reducer(originalStateToUnread, actionToUnread).messages;
         expect(actual).toEqual([
+            { selected: true, read: true },
+            { selected: true, read: true },
+            { selected: false, read: false }
+        ])
+        expect(actualUnread).toEqual([
             { selected: true, read: false },
             { selected: true, read: false },
             { selected: true, read: false },

@@ -1,4 +1,4 @@
-import { UPDATE_MESSAGE, SELECT_ALL, MARK_READ } from "../actions/actions";
+import { actionTypes } from "../actions/actions";
 
 export const initialState = {
     messages: [
@@ -67,13 +67,13 @@ export const initialState = {
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case UPDATE_MESSAGE:
+        case actionTypes.UPDATE_MESSAGE:
             return updateAllTakeAction(state, action)
 
-        case SELECT_ALL:
+        case actionTypes.SELECT_ALL:
             return selectAllTakeAction(state)
 
-        case MARK_READ:
+        case actionTypes.MARK_READ:
             return markReadTakeAction(state, action)
 
         default:
@@ -122,7 +122,6 @@ const selectAllTakeAction = (state) => {
 
 
 const markReadTakeAction = (state, action) => {
-    console.log('markReadTakeAction', JSON.stringify(action))
     return ({
         ...state,
         messages: state.messages.map((m) => (m.selected ? { ...m, read: action.payload } : m))
